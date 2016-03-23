@@ -21,7 +21,7 @@ struct in6_addr addr6 =  IN6ADDR_ANY_INIT ;
 char str[INET_ADDRSTRLEN];
 char str6[INET6_ADDRSTRLEN];
 
-myip (list) WORD_LIST *list;
+int myip (list) WORD_LIST *list;
 {
   WORD_LIST *w = NULL;
   int opt = 0;
@@ -47,9 +47,8 @@ myip (list) WORD_LIST *list;
         break;
       case 'h':
         builtin_usage();
-        break;
       default:
-        break;
+        return (EX_USAGE);
     }
   }
   list = loptend;
