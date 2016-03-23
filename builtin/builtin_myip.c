@@ -47,8 +47,9 @@ int myip (list) WORD_LIST *list;
         break;
       case 'h':
         builtin_usage();
+        return (EXECUTION_SUCCESS);
       default:
-        return (EX_USAGE);
+        break;
     }
   }
   list = loptend;
