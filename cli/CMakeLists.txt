@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project(myip)
+set(SOURCE_FILES cli.c ../lib/myexip.c ../lib/myexip.h ../lib/mylocalip.c ../lib/mylocalip.h ../lib/print_info.c ../lib/print_info.h)
+set(INCLUDE_DIR ./ ../lib)
+add_executable(myip ${SOURCE_FILES})
+target_include_directories(myip PRIVATE ${INCLUDE_DIR})
+add_definitions(-W -Wall -Wextra)

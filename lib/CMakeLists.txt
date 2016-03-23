@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project(myip)
+set(SOURCE_FILES cli.c myexip.c myexip.h mylocalip.c mylocalip.h print_info.c print_info.h)
+add_executable(myip ${SOURCE_FILES})
+add_definitions(-W -Wall -Wextra)
