@@ -9,12 +9,14 @@
 #include <errno.h>
 #include <stdbool.h>
 #include "variables.h"
+#include "common.h" // req for builtin_usage, no_options
 
 // local
 #include <netinet/in.h>
 #include "mylocalip.h"
 #include "myexip.h"
 #include "print_info.h"
+#include <arpa/inet.h> // req for inet_ntop
 
 struct in_addr addr = { 0 };
 struct in6_addr addr6 =  IN6ADDR_ANY_INIT ;
@@ -119,11 +121,10 @@ int myip (list) WORD_LIST *list;
 }
 
 char *builtin_myip_doc[] = {
-	"myip is a resolver of the public ip\n",
-	"the service is done by myexternalip.com\n",
-	"usage:\n",
-	"myip -v var ipv4 [-o]\n",
-	"myip -v var ipv6 -6 [-o]\n",
+	"myip is a resolver of private ip or\n",
+    "the public ip. The service is done by myexternalip.com\n",
+	"usage:\ndefaults to ipv4\n",
+	"myip [-6] [-i <iface>] [-v var] [-o]\n",
 	(char *)NULL
 };
 
@@ -132,6 +133,6 @@ struct builtin builtin_myip_struct = {
 	myip,			/* function implementing the builtin */
 	BUILTIN_ENABLED,		/* initial flags for builtin */
 	builtin_myip_doc,			/* array of long documentation strings. */
-	"myip -v var -o",	/* usage synopsis; becomes short_doc */
+	"myip [-6] [-i <iface>] [-v var] [-o]",	/* usage synopsis; becomes short_doc */
 	0				/* reserved for internal use */
 };
