@@ -11,7 +11,6 @@
 #include "variables.h"
 
 // local
-
 #include <netinet/in.h>
 #include "mylocalip.h"
 #include "myexip.h"
@@ -22,24 +21,13 @@ struct in6_addr addr6 =  IN6ADDR_ANY_INIT ;
 char str[INET_ADDRSTRLEN];
 char str6[INET6_ADDRSTRLEN];
 
-builtin_myip (list) WORD_LIST *list;
+myip (list) WORD_LIST *list;
 {
   WORD_LIST *w = NULL;
   int opt = 0;
   char *var = NULL;
   bool overwrite = false;
   bool ipv6 = false;
-
-  //catch no options // to be used when you want no options, but will allow words
-  //if (no_options (list)){
-  //    return (EX_USAGE);
-  //}
-
-  //catch no arguments // list is the array of words and options
-  //if (list == 0){
-  //  builtin_usage();
-  //  return(EX_USAGE);
-  //}
 
   reset_internal_getopt();
   while ((opt = internal_getopt (list, "ov:h6")) != -1){
@@ -76,23 +64,23 @@ builtin_myip (list) WORD_LIST *list;
     if (!v || overwrite == true) {
       printf("setting values\n");
       if (ipv6 == true) {
-        //addr6 = myexip6();
-        //inet_ntop(AF_INET6, &(addr6), str6, INET6_ADDRSTRLEN);
-        //bind_variable (var, str6, 0);
+        addr6 = myexip6();
+        inet_ntop(AF_INET6, &(addr6), str6, INET6_ADDRSTRLEN);
+        bind_variable (var, str6, 0);
       } else {
-        //addr = myexip();
-        //inet_ntop(AF_INET, &(addr), str, INET_ADDRSTRLEN);
-        //bind_variable (var, str, 0);
+        addr = myexip();
+        inet_ntop(AF_INET, &(addr), str, INET_ADDRSTRLEN);
+        bind_variable (var, str, 0);
       }
     }
   } else {
       printf("printing values\n");
       if (ipv6 == true) {
-          //addr6 = myexip6();
-          //print_in6_addr(addr6);
+          addr6 = myexip6();
+          print_in6_addr(addr6);
       } else {
-          //addr = myexip();
-          //print_in_addr(addr);
+          addr = myexip();
+          print_in_addr(addr);
       }
   }
 
@@ -118,7 +106,7 @@ char *builtin_myip_doc[] = {
 
 struct builtin builtin_myip_struct = {
 	"builtin_myip",			/* builtin name */
-	builtin_myip,			/* function implementing the builtin */
+	myip,			/* function implementing the builtin */
 	BUILTIN_ENABLED,		/* initial flags for builtin */
 	builtin_myip_doc,			/* array of long documentation strings. */
 	"myip -v var -o ipv4",	/* usage synopsis; becomes short_doc */
