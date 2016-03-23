@@ -1,21 +1,21 @@
-# myip-cli
-myip-cli tool to show external/internal ip
+# myip
+myip tool to show external/internal ip
 
-## Build
+## Cli
+
+### Build
 
 ```bash
+cd cli
 mkdir build
 cd build
 cmake ..
 make
 ```
 
-## Usage
+### Usage
 
 ```bash
-mkdir build
-cd build
-
  ./myip -h
 use: ./myip [-6] [-i ethN]
 
