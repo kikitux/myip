@@ -64,51 +64,58 @@ int myip (list) WORD_LIST *list;
 
   if (var){
     SHELL_VAR *v = find_variable(var);
-    if (v && overwrite == false) {
+    if (v && !overwrite) {
       printf("OS var %s has values. not overwriting\n",var);
-    }
-    if (!v || overwrite == true) {
-      if (ipv6 == true) {
+    } // end if
+
+    if (!v || overwrite) {
+      if (ipv6) {
         if ( iface == NULL ) {
           addr6 = myexip6();
-          inet_ntop(AF_INET6, &(addr6), str6, INET6_ADDRSTRLEN);
-          bind_variable(var, str6, 0);
+          //inet_ntop(AF_INET6, &(addr6), str6, INET6_ADDRSTRLEN);
+          //bind_variable(var, str6, 0);
         } else {
           addr6 = mylocalip6(iface);
-          inet_ntop(AF_INET6, &(addr6), str6, INET6_ADDRSTRLEN);
-          bind_variable(var, str6, 0);
-        }
+          //inet_ntop(AF_INET6, &(addr6), str6, INET6_ADDRSTRLEN);
+          //bind_variable(var, str6, 0);
+        } // end if
+        inet_ntop(AF_INET6, &(addr6), str6, INET6_ADDRSTRLEN);
+        bind_variable(var, str6, 0);
       } else {
         if ( iface == NULL ) {
           addr = myexip();
-          inet_ntop(AF_INET, &(addr), str, INET_ADDRSTRLEN);
-          bind_variable (var, str, 0);
+          //inet_ntop(AF_INET, &(addr), str, INET_ADDRSTRLEN);
+          //bind_variable (var, str, 0);
         } else {
           addr = mylocalip(iface);
-          inet_ntop(AF_INET, &(addr), str, INET_ADDRSTRLEN);
-          bind_variable (var, str, 0);
-        }
+          //inet_ntop(AF_INET, &(addr), str, INET_ADDRSTRLEN);
+          //bind_variable (var, str, 0);
+        } // end if
+        inet_ntop(AF_INET, &(addr), str, INET_ADDRSTRLEN);
+        bind_variable (var, str, 0);
       }
     }
   } else {
-      if (ipv6 == true) {
+      if (ipv6) {
         if ( iface == NULL ) {
           addr6 = myexip6();
-          print_in6_addr(addr6);
+          //print_in6_addr(addr6);
         } else {
           addr6 = mylocalip6(iface);
-          print_in6_addr(addr6);
-        }
+          //print_in6_addr(addr6);
+        } // end if
+        print_in6_addr(addr6);
       } else {
         if ( iface == NULL ) {
           addr = myexip();
-          print_in_addr(addr);
+          //print_in_addr(addr);
         } else {
           addr = mylocalip(iface);
-          print_in_addr(addr);
-        }
+          //print_in_addr(addr);
+        } // end if
+        print_in_addr(addr);
       }
-  }
+  } 
 
   if (list != 0){
     w = list;
