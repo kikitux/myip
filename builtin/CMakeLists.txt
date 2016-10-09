@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(builtin_myip)
-set(BASH_DIR ../../aports/main/bash/src/bash-4.3)
+set(BASH_DIR $ENV{BASH_DIR})
 set(INCLUDE_DIR ../lib ${BASH_DIR} ${BASH_DIR}/include
   ${BASH_DIR}/builtins ${BASH_DIR}/examples/loadables
   ${BASH_DIR}/examples ${BASH_DIR}/lib
