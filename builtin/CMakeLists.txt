@@ -1,10 +1,19 @@
 cmake_minimum_required(VERSION 2.8)
 project(builtin_myip)
-set(BASH_DIR $ENV{BASH_DIR})
+
+#BASH_DIR for source bash
+#use env var or bash/
+if(DEFINED ENV{BASH_DIR})
+  set(BASH_DIR $ENV{BASH_DIR})
+else()
+  set(BASH_DIR bash/)
+endif()
+
 set(INCLUDE_DIR ../lib ${BASH_DIR} ${BASH_DIR}/include
   ${BASH_DIR}/builtins ${BASH_DIR}/examples/loadables
   ${BASH_DIR}/examples ${BASH_DIR}/lib
   ${BASH_DIR}/lib/termcap)
+
 set(SOURCE_FILES ../lib/myexip.c ../lib/myexip.h ../lib/mylocalip.c ../lib/mylocalip.h ../lib/print_info.c ../lib/print_info.h)
 
 SET(BUILD_SHARED_LIBRARIES ON)
